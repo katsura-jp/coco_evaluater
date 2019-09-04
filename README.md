@@ -32,7 +32,7 @@ coco_evaluator.reflesh()
 with torch.no_grad():
   for inputs, targets in dataloader:
     outputs = model(inputs)
-    # outputs is dict("boxes", "labels", "scores")
+    # outputs is list of dict("boxes", "labels", "scores")
     outputs = [{k: v.to('cpu') for k, v in t.items()} for t in outputs]
     res = {idx.item(): output for idx, output in zip(ids, outputs)}
     coco_evaluator.update(res)
